@@ -4,36 +4,39 @@ import { useState } from 'react';
 
 export default function Sidebar() {
     const [activeMenu, setActiveMenu] = useState('Dashboard');
+    const [openSubmenu, setOpenSubmenu] = useState<string | null>('Leveranciers');
 
     const menuItems = [
         {
-            title: 'MENU',
+            title: 'İÇERİK YÖNETİMİ',
             items: [
-                { name: 'Dashboard', icon: '📊', hasSubmenu: true },
-                { name: 'AI Asistant', icon: '🤖', badge: 'NEW', hasSubmenu: true },
-                { name: 'E-commerce', icon: '🛒', badge: 'NEW', hasSubmenu: true },
-                { name: 'Calendar', icon: '📅' },
-                { name: 'User Profile', icon: '👤' },
-                { name: 'Task', icon: '✓', hasSubmenu: true },
-                { name: 'Forms', icon: '📝', hasSubmenu: true },
-                { name: 'Tables', icon: '📋', hasSubmenu: true },
-                { name: 'Pages', icon: '📄', hasSubmenu: true },
+                { name: 'Dashboard', icon: '📊' },
+                {
+                    name: 'Leveranciers',
+                    icon: '🏢',
+                    hasSubmenu: true,
+                    submenuItems: [
+                        { name: 'Alle Leveranciers', icon: '📋' },
+                        { name: 'Particulier', icon: '🏠', count: 31 },
+                        { name: 'Zakelijk', icon: '💼', count: 10 },
+                        { name: 'Grootzakelijk', icon: '🏭', count: 8 },
+                    ]
+                },
+                {
+                    name: 'Blog',
+                    icon: '✍️'
+                },
+                {
+                    name: 'Contact',
+                    icon: '📞'
+                },
             ],
         },
         {
-            title: 'SUPPORT',
+            title: 'AYARLAR',
             items: [
-                { name: 'Chat', icon: '💬' },
-                { name: 'Support Ticket', icon: '🎫', badge: 'NEW', hasSubmenu: true },
-                { name: 'Email', icon: '✉️', hasSubmenu: true },
-            ],
-        },
-        {
-            title: 'OTHERS',
-            items: [
-                { name: 'Charts', icon: '📈', hasSubmenu: true },
-                { name: 'UI Elements', icon: '🎨', hasSubmenu: true },
-                { name: 'Authentication', icon: '🔐', hasSubmenu: true },
+                { name: 'Site Ayarları', icon: '⚙️' },
+                { name: 'Profil', icon: '👤' },
             ],
         },
     ];
@@ -66,7 +69,12 @@ export default function Sidebar() {
                             {section.items.map((item, itemIdx) => (
                                 <li key={itemIdx}>
                                     <button
-                                        onClick={() => setActiveMenu(item.name)}
+                                        onClick={() => {
+                                            setActiveMenu(item.name);
+                                            if (item.hasSubmenu) {
+                                                setOpenSubmenu(openSubmenu === item.name ? null : item.name);
+                                            }
+                                        }}
                                         className={`
                       w-full flex items-center justify-between px-3 py-2.5 rounded-lg
                       transition-all duration-200 group
@@ -79,15 +87,10 @@ export default function Sidebar() {
                                         <div className="flex items-center space-x-3">
                                             <span className="text-lg">{item.icon}</span>
                                             <span className="font-medium text-sm">{item.name}</span>
-                                            {item.badge && (
-                                                <span className="px-2 py-0.5 text-[10px] font-semibold bg-green-500 text-white rounded-full">
-                                                    {item.badge}
-                                                </span>
-                                            )}
                                         </div>
                                         {item.hasSubmenu && (
                                             <svg
-                                                className={`w-4 h-4 transition-transform ${activeMenu === item.name ? 'rotate-180' : ''
+                                                className={`w-4 h-4 transition-transform ${openSubmenu === item.name ? 'rotate-180' : ''
                                                     }`}
                                                 fill="none"
                                                 stroke="currentColor"
@@ -97,6 +100,37 @@ export default function Sidebar() {
                                             </svg>
                                         )}
                                     </button>
+
+                                    {/* Submenu Items */}
+                                    {item.hasSubmenu && openSubmenu === item.name && item.submenuItems && (
+                                        <ul className="mt-1 ml-6 space-y-1">
+                                            {item.submenuItems.map((subItem: any, subIdx: number) => (
+                                                <li key={subIdx}>
+                                                    <button
+                                                        onClick={() => setActiveMenu(subItem.name)}
+                                                        className={`
+                                                            w-full flex items-center justify-between px-3 py-2 rounded-lg
+                                                            transition-all duration-200 text-sm
+                                                            ${activeMenu === subItem.name
+                                                                ? 'bg-blue-500/20 text-blue-300'
+                                                                : 'text-slate-400 hover:bg-slate-800/30 hover:text-slate-200'
+                                                            }
+                                                        `}
+                                                    >
+                                                        <div className="flex items-center space-x-2">
+                                                            <span className="text-base">{subItem.icon}</span>
+                                                            <span>{subItem.name}</span>
+                                                        </div>
+                                                        {subItem.count && (
+                                                            <span className="text-xs bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
+                                                                {subItem.count}
+                                                            </span>
+                                                        )}
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                 </li>
                             ))}
                         </ul>
@@ -105,11 +139,11 @@ export default function Sidebar() {
             </nav>
 
             {/* Tailwind CSS Dashboard Badge */}
-            <div className="absolute bottom-4 left-4 right-4">
+            <a href="https://suleyman.com.tr" className="absolute hover:bg-slate-800/50 hover:text-white bottom-4 left-4 right-4">
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-3 text-center">
-                    <p className="text-xs text-slate-400">#1 Tailwind CSS Dashboard</p>
+                    <p className="text-sm text-slate-400">Siteye Git</p>
                 </div>
-            </div>
+            </a>
         </aside>
     );
 }
