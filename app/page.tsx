@@ -7,95 +7,95 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header />
       <Hero />
-      
+
       {/* Waarom Duurzaamgarant Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-8 md:py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-montserrat">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4 font-montserrat">
                 Waarom Duurzaamgarant?
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
                 Duurzaamgarant helpt je je energierekening te verlagen en bij te dragen aan een duurzame toekomst
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
               {/* Reason 1 */}
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 border-2 border-green-200 hover:border-green-400 transition-all">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 md:p-6 lg:p-8 border-2 border-green-200 hover:border-green-400 transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-4 md:mb-6">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 font-montserrat">Tot €500 Bespaar</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 font-montserrat">Tot €500 Bespaar</h3>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                   Vergelijk alle energieleveranciers en bespaar tot wel €500 per jaar op je energierekening. Wij vinden altijd de scherpste tarieven voor jouw situatie.
                 </p>
               </div>
 
               {/* Reason 2 */}
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 border-2 border-green-200 hover:border-green-400 transition-all">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 md:p-6 lg:p-8 border-2 border-green-200 hover:border-green-400 transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-4 md:mb-6">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 font-montserrat">100% Duurzaam</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 font-montserrat">100% Duurzaam</h3>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                   Kies voor groene energie en draag bij aan een duurzame toekomst. Wij helpen je de beste groene energiedeal te vinden die bij jou past.
                 </p>
               </div>
 
               {/* Reason 3 */}
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 border-2 border-green-200 hover:border-green-400 transition-all">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 md:p-6 lg:p-8 border-2 border-green-200 hover:border-green-400 transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-4 md:mb-6">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 font-montserrat">Snel & Eenvoudig</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 font-montserrat">Snel & Eenvoudig</h3>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                   Binnen 5 minuten heb je een overzicht van alle beschikbare tarieven. Geen gedoe, geen verborgen kosten. Gewoon de beste deal.
                 </p>
               </div>
 
               {/* Reason 4 */}
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 border-2 border-green-200 hover:border-green-400 transition-all">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 md:p-6 lg:p-8 border-2 border-green-200 hover:border-green-400 transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-4 md:mb-6">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 font-montserrat">Volledig Onafhankelijk</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 font-montserrat">Volledig Onafhankelijk</h3>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                   Wij werken niet voor energieleveranciers. Onze vergelijking is 100% objectief en onafhankelijk. Jij krijgt altijd het beste advies.
                 </p>
               </div>
 
               {/* Reason 5 */}
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 border-2 border-green-200 hover:border-green-400 transition-all">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 md:p-6 lg:p-8 border-2 border-green-200 hover:border-green-400 transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-4 md:mb-6">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 font-montserrat">Gratis Overstappen</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 font-montserrat">Gratis Overstappen</h3>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                   Wij regelen de hele overstap voor je, volledig gratis. Geen gedoe, geen papierwerk. Jij bespaart, wij regelen het.
                 </p>
               </div>
 
               {/* Reason 6 */}
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 border-2 border-green-200 hover:border-green-400 transition-all">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 md:p-6 lg:p-8 border-2 border-green-200 hover:border-green-400 transition-all">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center mb-4 md:mb-6">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 font-montserrat">Persoonlijk Advies</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 font-montserrat">Persoonlijk Advies</h3>
+                <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                   Ons team staat klaar om je te helpen met persoonlijk advies. Bel ons gratis of stuur een bericht voor al je vragen.
                 </p>
               </div>
@@ -105,30 +105,30 @@ export default function Home() {
       </section>
 
       {/* Hoe Werkt Duurzaamgarant Section */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 py-8 md:py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-montserrat">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4 font-montserrat">
                 Hoe Werkt Duurzaamgarant?
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
                 Duurzaamgarant helpt je je energierekening te verlagen. Zo werkt het:
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {/* Sol Taraf - Üst 2 Adım */}
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {/* Step 1 */}
-                <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="flex items-start gap-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center flex-shrink-0 text-white text-2xl font-bold">
+                <div className="bg-white rounded-xl p-4 md:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="flex items-start gap-3 md:gap-6">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center flex-shrink-0 text-white text-lg md:text-2xl font-bold">
                       1
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 font-montserrat">Vergelijk & Kies</h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 font-montserrat">Vergelijk & Kies</h3>
+                      <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                         Vul je gegevens in en vergelijk alle beschikbare energietarieven. Wij tonen je direct de scherpste tarieven voor jouw situatie.
                       </p>
                     </div>
@@ -136,14 +136,14 @@ export default function Home() {
                 </div>
 
                 {/* Step 2 */}
-                <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="flex items-start gap-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center flex-shrink-0 text-white text-2xl font-bold">
+                <div className="bg-white rounded-xl p-4 md:p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="flex items-start gap-3 md:gap-6">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center flex-shrink-0 text-white text-lg md:text-2xl font-bold">
                       2
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 font-montserrat">Wij Regelen Alles</h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 md:mb-3 font-montserrat">Wij Regelen Alles</h3>
+                      <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                         Kies je nieuwe energieleverancier en wij regelen de hele overstap voor je. Geen gedoe, geen papierwerk, volledig gratis.
                       </p>
                     </div>
@@ -152,11 +152,11 @@ export default function Home() {
               </div>
 
               {/* Orta - Görsel */}
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center my-6 md:my-0">
                 <img
                   src="/images/image14.png"
                   alt="Hoe Werkt Duurzaamgarant"
-                  className="w-full h-auto max-w-lg object-contain"
+                  className="w-full h-auto max-w-xs md:max-w-lg object-contain"
                 />
               </div>
 
@@ -198,19 +198,19 @@ export default function Home() {
       </section>
 
       {/* Verlaag Je Energierekening in 3 Eenvoudige Stappen Section */}
-      <section className="bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white py-16">
+      <section className="bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white py-8 md:py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 font-montserrat">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 font-montserrat">
                 Verlaag Je Energierekening in 3 Eenvoudige Stappen
               </h2>
-              <p className="text-xl text-green-100 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-green-100 max-w-2xl mx-auto">
                 Met Duurzaamgarant is het verlagen van je energierekening heel eenvoudig. Slechts 3 stappen en je begint met besparen.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
               {/* Stap 1 */}
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border-2 border-white/20 hover:border-white/40 transition-all">
                 <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-green-600 text-4xl font-bold shadow-lg">
@@ -401,7 +401,7 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-        </div>
+                </div>
               </a>
 
               {/* Budget Energie */}

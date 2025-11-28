@@ -5,12 +5,12 @@ import { usePathname } from 'next/navigation';
 
 export default function ComparisonForm() {
   const pathname = usePathname();
-  
+
   // Her render'da localStorage'dan currentHome değerini oku
   // Bu sayede Header'daki değişiklikler anında yansır
   const getCurrentHome = () => {
     if (typeof window === 'undefined') return '/';
-    
+
     // Önce pathname'e göre belirle
     if (pathname?.startsWith('/zakelijk')) {
       return '/zakelijk';
@@ -22,14 +22,14 @@ export default function ComparisonForm() {
       return storedHome || '/';
     }
   };
-  
+
   // currentHome'u her render'da güncelle
   const currentHomeValue = getCurrentHome();
-  
+
   // Leverancier seçenekleri currentHomeValue'ya göre memoize et
   const leveranciers = useMemo(() => {
     let source = 'particulier';
-    
+
     if (currentHomeValue === '/zakelijk' || pathname?.startsWith('/zakelijk')) {
       source = 'zakelijk';
     } else if (currentHomeValue === '/grootzakelijk' || pathname?.startsWith('/grootzakelijk')) {
@@ -37,7 +37,7 @@ export default function ComparisonForm() {
     } else {
       source = 'particulier';
     }
-    
+
     if (source === 'zakelijk') {
       return [
         { value: 'budget-energie-zakelijk', label: 'Budget Energie Zakelijk' },
@@ -211,9 +211,8 @@ export default function ComparisonForm() {
             <select
               value={formData.leverancier}
               onChange={(e) => setFormData({ ...formData, leverancier: e.target.value })}
-              className={`w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent appearance-none bg-white ${
-                formData.leverancier ? 'text-gray-900' : 'text-gray-400'
-              }`}
+              className={`w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent appearance-none bg-white ${formData.leverancier ? 'text-gray-900' : 'text-gray-400'
+                }`}
             >
               <option value="" disabled>Kies je leverancier...</option>
               {leveranciers.map((leverancier) => (
@@ -231,7 +230,7 @@ export default function ComparisonForm() {
         </div>
 
         {/* Hane Büyüklüğü ve Güneş Paneli - Yan Yana */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid xl:grid-cols-2 gap-6">
           {/* Hane Büyüklüğü */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-3">
@@ -241,11 +240,10 @@ export default function ComparisonForm() {
               {[1, 2, 3, 4, 5].map((num) => (
                 <label
                   key={num}
-                  className={`flex-1 cursor-pointer border-2 rounded-lg p-3 text-center transition-all ${
-                    formData.huishouden === num.toString()
-                      ? 'border-blue-600 bg-blue-50 text-blue-700'
-                      : 'border-gray-200 hover:border-gray-300 text-gray-900 bg-white'
-                  }`}
+                  className={`flex-1 cursor-pointer border-2 rounded-lg p-3 text-center transition-all ${formData.huishouden === num.toString()
+                    ? 'border-blue-600 bg-blue-50 text-blue-700'
+                    : 'border-gray-200 hover:border-gray-300 text-gray-900 bg-white'
+                    }`}
                 >
                   <input
                     type="radio"
@@ -281,8 +279,8 @@ export default function ComparisonForm() {
               </button>
               <div className="flex-1 flex items-center justify-center gap-2 py-3 pr-4">
                 <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="5" fill="currentColor"/>
-                  <path d="M12 1v4M12 19v4M23 12h-4M5 12H1M19.07 4.93l-2.83 2.83M7.76 16.24l-2.83 2.83M19.07 19.07l-2.83-2.83M7.76 7.76L4.93 4.93" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <circle cx="12" cy="12" r="5" fill="currentColor" />
+                  <path d="M12 1v4M12 19v4M23 12h-4M5 12H1M19.07 4.93l-2.83 2.83M7.76 16.24l-2.83 2.83M19.07 19.07l-2.83-2.83M7.76 7.76L4.93 4.93" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
                 <span className="text-xl font-bold text-gray-900">{formData.zonnepanelen}</span>
               </div>
@@ -320,9 +318,8 @@ export default function ComparisonForm() {
 
         {/* Manuel Tüketim Girişi */}
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            showManualInput ? 'max-h-96 opacity-100 mb-4' : 'max-h-0 opacity-0 mb-0'
-          }`}
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${showManualInput ? 'max-h-96 opacity-100 mb-4' : 'max-h-0 opacity-0 mb-0'
+            }`}
         >
           <div className="bg-white border border-gray-200 rounded-lg p-3">
             <h3 className="text-sm font-bold text-gray-800 mb-2">Mijn jaarverbruik</h3>
