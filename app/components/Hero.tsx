@@ -25,7 +25,7 @@ export default function Hero() {
             </h1>
 
             {/* Subheading */}
-            <p className="text-lg md:text-xl text-green-100 mb-6 md:mb-8 max-w-xl">
+            <p className="text-lg md:text-2xl text-green-100 mb-6 md:mb-8 max-w-xl">
               Vergelijk alle energieleveranciers en bespaar tot wel <span className="font-bold text-white">€500 per jaar</span> op je energierekening
             </p>
 

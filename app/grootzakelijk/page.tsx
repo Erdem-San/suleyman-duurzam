@@ -88,7 +88,7 @@ export default function GrootzakelijkPage() {
               </h1>
 
               {/* Subheading - Orijinal Metin Korundu, Boyutlandırma İkinci Koda Benzetildi */}
-              <p className="text-lg md:text-xl text-green-100 mb-6 md:mb-8 max-w-xl">
+              <p className="text-lg md:text-2xl text-green-100 mb-6 md:mb-8 max-w-xl">
                 Speciaal voor grote bedrijven en organisaties met hoog energieverbruik. Vergelijk alle energieleveranciers en bespaar tot wel <span className="font-bold text-white">€500 per jaar</span> met onze professionele energievergelijking op maat.
               </p>
 
