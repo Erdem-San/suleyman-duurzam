@@ -29,7 +29,11 @@ export default function Sidebar() {
                 {
                     name: 'Blog',
                     icon: '✍️',
-                    href: '/admin/blog'
+                    hasSubmenu: true,
+                    submenuItems: [
+                        { name: 'Alle Blogs', icon: '📝', href: '/admin/blogs' },
+                        { name: 'Nieuwe Blog', icon: '➕', href: '/admin/blogs/new' },
+                    ]
                 },
                 {
                     name: 'Contact',
@@ -61,8 +65,16 @@ export default function Sidebar() {
             } else if (pathname === '/admin/leveranciers') {
                 setActiveMenu('Alle Leveranciers');
             }
-        } else if (pathname?.startsWith('/admin/blog')) {
+        } else if (pathname?.startsWith('/admin/blogs')) {
             setActiveMenu('Blog');
+            setOpenSubmenu('Blog');
+
+            // Check for specific submenu items
+            if (pathname === '/admin/blogs/new') {
+                setActiveMenu('Nieuwe Blog');
+            } else if (pathname === '/admin/blogs') {
+                setActiveMenu('Alle Blogs');
+            }
         } else if (pathname?.startsWith('/admin/contact')) {
             setActiveMenu('Contact');
         } else if (pathname?.startsWith('/admin/settings')) {

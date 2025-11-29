@@ -220,6 +220,11 @@ export default function Header() {
               <span className="absolute inset-0 bg-gradient-to-r from-green-100 to-green-200 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-green-600 to-green-700 group-hover:w-3/4 transition-all duration-300 rounded-full"></span>
             </Link>
+            <Link href="/blog" className="relative px-4 py-2 text-gray-700 hover:text-green-700 rounded-lg font-medium transition-all duration-300 text-sm font-montserrat group">
+              <span className="relative z-10">Blog</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-green-100 to-green-200 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-green-600 to-green-700 group-hover:w-3/4 transition-all duration-300 rounded-full"></span>
+            </Link>
             <Link href="/over-ons" className="relative px-4 py-2 text-gray-700 hover:text-green-700 rounded-lg font-medium transition-all duration-300 text-sm font-montserrat group">
               <span className="relative z-10">Over Ons</span>
               <span className="absolute inset-0 bg-gradient-to-r from-green-100 to-green-200 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -309,6 +314,13 @@ export default function Header() {
                   className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg font-medium transition-colors"
                 >
                   Leveranciers
+                </Link>
+                <Link
+                  href="/blog"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg font-medium transition-colors"
+                >
+                  Blog
                 </Link>
                 <Link
                   href="/over-ons"
