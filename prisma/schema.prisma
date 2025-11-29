@@ -60,3 +60,24 @@ model Leverancier {
 
   @@map("leveranciers")
 }
+
+enum ContactStatus {
+  UNREAD
+  READ
+  DRAFT
+}
+
+model ContactMessage {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String        @db.Text
+  status    ContactStatus @default(UNREAD)
+  isDeleted Boolean       @default(false)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@map("contact_messages")
+}

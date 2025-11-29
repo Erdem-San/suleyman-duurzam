@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Sidebar() {
+    const pathname = usePathname();
     const [activeMenu, setActiveMenu] = useState('Dashboard');
     const [openSubmenu, setOpenSubmenu] = useState<string | null>('Leveranciers');
 
@@ -44,6 +46,31 @@ export default function Sidebar() {
             ],
         },
     ];
+
+    // Set active menu based on current pathname
+    useEffect(() => {
+        if (pathname === '/admin') {
+            setActiveMenu('Dashboard');
+        } else if (pathname?.startsWith('/admin/leveranciers')) {
+            setActiveMenu('Leveranciers');
+            setOpenSubmenu('Leveranciers');
+
+            // Check for specific submenu items
+            if (pathname === '/admin/leveranciers/new') {
+                setActiveMenu('Yeni Ekle');
+            } else if (pathname === '/admin/leveranciers') {
+                setActiveMenu('Alle Leveranciers');
+            }
+        } else if (pathname?.startsWith('/admin/blog')) {
+            setActiveMenu('Blog');
+        } else if (pathname?.startsWith('/admin/contact')) {
+            setActiveMenu('Contact');
+        } else if (pathname?.startsWith('/admin/settings')) {
+            setActiveMenu('Site Ayarları');
+        } else if (pathname?.startsWith('/admin/profile')) {
+            setActiveMenu('Profil');
+        }
+    }, [pathname]);
 
     return (
         <aside className="fixed left-0 top-0 h-screen w-64 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-r border-slate-700/50 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
