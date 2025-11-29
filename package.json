@@ -9,6 +9,7 @@
     "lint": "eslint",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
+    "prisma:seed": "tsx prisma/seed.ts",
     "create-admin": "tsx scripts/create-admin.ts"
   },
   "dependencies": {

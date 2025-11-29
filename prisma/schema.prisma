@@ -20,3 +20,43 @@ model User {
 
   @@map("users")
 }
+
+model LeverancierCategory {
+  id            String        @id @default(cuid())
+  name          String        @unique
+  slug          String        @unique
+  description   String        @db.Text
+  leveranciers  Leverancier[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("leverancier_categories")
+}
+
+model Leverancier {
+  id          String                 @id @default(cuid())
+  name        String
+  slug        String                 @unique
+  logo        String?
+  customers   String
+  description String                 @db.Text
+  rating      Float                  @default(4.0)
+  color       String                 @default("from-green-600 to-green-700")
+  
+  stroom      String                 @default("€0,25 per kWh")
+  gas         String                 @default("€1,35 per m³")
+  vastrecht   String                 @default("€12,50 per maand")
+  
+  features    Json
+  voordelen   Json
+  nadelen     Json
+  
+  categoryId  String?
+  category    LeverancierCategory?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  
+  published   Boolean                @default(true)
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+
+  @@map("leveranciers")
+}

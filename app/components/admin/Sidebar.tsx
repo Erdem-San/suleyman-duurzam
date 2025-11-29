@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Sidebar() {
     const [activeMenu, setActiveMenu] = useState('Dashboard');
@@ -10,33 +11,36 @@ export default function Sidebar() {
         {
             title: 'İÇERİK YÖNETİMİ',
             items: [
-                { name: 'Dashboard', icon: '📊' },
+                { name: 'Dashboard', icon: '📊', href: '/admin' },
                 {
                     name: 'Leveranciers',
                     icon: '🏢',
                     hasSubmenu: true,
                     submenuItems: [
-                        { name: 'Alle Leveranciers', icon: '📋' },
-                        { name: 'Particulier', icon: '🏠', count: 31 },
-                        { name: 'Zakelijk', icon: '💼', count: 10 },
-                        { name: 'Grootzakelijk', icon: '🏭', count: 8 },
+                        { name: 'Alle Leveranciers', icon: '📋', href: '/admin/leveranciers' },
+                        { name: 'Particulier', icon: '🏠', href: '/admin/leveranciers?category=particulier' },
+                        { name: 'Zakelijk', icon: '🏢', href: '/admin/leveranciers?category=zakelijk' },
+                        { name: 'Grootzakelijk', icon: '🏭', href: '/admin/leveranciers?category=grootzakelijk' },
+                        { name: 'Yeni Ekle', icon: '➕', href: '/admin/leveranciers/new' },
                     ]
                 },
                 {
                     name: 'Blog',
-                    icon: '✍️'
+                    icon: '✍️',
+                    href: '/admin/blog'
                 },
                 {
                     name: 'Contact',
-                    icon: '📞'
+                    icon: '📞',
+                    href: '/admin/contact'
                 },
             ],
         },
         {
             title: 'AYARLAR',
             items: [
-                { name: 'Site Ayarları', icon: '⚙️' },
-                { name: 'Profil', icon: '👤' },
+                { name: 'Site Ayarları', icon: '⚙️', href: '/admin/settings' },
+                { name: 'Profil', icon: '👤', href: '/admin/profile' },
             ],
         },
     ];
@@ -68,65 +72,110 @@ export default function Sidebar() {
                         <ul className="space-y-1 px-3">
                             {section.items.map((item, itemIdx) => (
                                 <li key={itemIdx}>
-                                    <button
-                                        onClick={() => {
-                                            setActiveMenu(item.name);
-                                            if (item.hasSubmenu) {
-                                                setOpenSubmenu(openSubmenu === item.name ? null : item.name);
-                                            }
-                                        }}
-                                        className={`
+                                    {item.href && !item.hasSubmenu ? (
+                                        <Link
+                                            href={item.href}
+                                            onClick={() => setActiveMenu(item.name)}
+                                            className={`
                       w-full flex items-center justify-between px-3 py-2.5 rounded-lg
                       transition-all duration-200 group
                       ${activeMenu === item.name
-                                                ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/30'
-                                                : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'
-                                            }
+                                                    ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/30'
+                                                    : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'
+                                                }
                     `}
-                                    >
-                                        <div className="flex items-center space-x-3">
-                                            <span className="text-lg">{item.icon}</span>
-                                            <span className="font-medium text-sm">{item.name}</span>
-                                        </div>
-                                        {item.hasSubmenu && (
-                                            <svg
-                                                className={`w-4 h-4 transition-transform ${openSubmenu === item.name ? 'rotate-180' : ''
-                                                    }`}
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                            </svg>
-                                        )}
-                                    </button>
+                                        >
+                                            <div className="flex items-center space-x-3">
+                                                <span className="text-lg">{item.icon}</span>
+                                                <span className="font-medium text-sm">{item.name}</span>
+                                            </div>
+                                        </Link>
+                                    ) : (
+                                        <button
+                                            onClick={() => {
+                                                setActiveMenu(item.name);
+                                                if (item.hasSubmenu) {
+                                                    setOpenSubmenu(openSubmenu === item.name ? null : item.name);
+                                                }
+                                            }}
+                                            className={`
+                      w-full flex items-center justify-between px-3 py-2.5 rounded-lg
+                      transition-all duration-200 group
+                      ${activeMenu === item.name
+                                                    ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/30'
+                                                    : 'text-slate-300 hover:bg-slate-800/50 hover:text-white'
+                                                }
+                    `}
+                                        >
+                                            <div className="flex items-center space-x-3">
+                                                <span className="text-lg">{item.icon}</span>
+                                                <span className="font-medium text-sm">{item.name}</span>
+                                            </div>
+                                            {item.hasSubmenu && (
+                                                <svg
+                                                    className={`w-4 h-4 transition-transform ${openSubmenu === item.name ? 'rotate-180' : ''
+                                                        }`}
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            )}
+                                        </button>
+                                    )}
 
                                     {/* Submenu Items */}
                                     {item.hasSubmenu && openSubmenu === item.name && item.submenuItems && (
                                         <ul className="mt-1 ml-6 space-y-1">
                                             {item.submenuItems.map((subItem: any, subIdx: number) => (
                                                 <li key={subIdx}>
-                                                    <button
-                                                        onClick={() => setActiveMenu(subItem.name)}
-                                                        className={`
-                                                            w-full flex items-center justify-between px-3 py-2 rounded-lg
-                                                            transition-all duration-200 text-sm
-                                                            ${activeMenu === subItem.name
-                                                                ? 'bg-blue-500/20 text-blue-300'
-                                                                : 'text-slate-400 hover:bg-slate-800/30 hover:text-slate-200'
-                                                            }
-                                                        `}
-                                                    >
-                                                        <div className="flex items-center space-x-2">
-                                                            <span className="text-base">{subItem.icon}</span>
-                                                            <span>{subItem.name}</span>
-                                                        </div>
-                                                        {subItem.count && (
-                                                            <span className="text-xs bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
-                                                                {subItem.count}
-                                                            </span>
-                                                        )}
-                                                    </button>
+                                                    {subItem.href ? (
+                                                        <Link
+                                                            href={subItem.href!}
+                                                            onClick={() => setActiveMenu(subItem.name)}
+                                                            className={`
+                                                                w-full flex items-center justify-between px-3 py-2 rounded-lg
+                                                                transition-all duration-200 text-sm
+                                                                ${activeMenu === subItem.name
+                                                                    ? 'bg-blue-500/20 text-blue-300'
+                                                                    : 'text-slate-400 hover:bg-slate-800/30 hover:text-slate-200'
+                                                                }
+                                                            `}
+                                                        >
+                                                            <div className="flex items-center space-x-2">
+                                                                <span className="text-base">{subItem.icon}</span>
+                                                                <span>{subItem.name}</span>
+                                                            </div>
+                                                            {subItem.count && (
+                                                                <span className="text-xs bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
+                                                                    {subItem.count}
+                                                                </span>
+                                                            )}
+                                                        </Link>
+                                                    ) : (
+                                                        <button
+                                                            onClick={() => setActiveMenu(subItem.name)}
+                                                            className={`
+                                                                w-full flex items-center justify-between px-3 py-2 rounded-lg
+                                                                transition-all duration-200 text-sm
+                                                                ${activeMenu === subItem.name
+                                                                    ? 'bg-blue-500/20 text-blue-300'
+                                                                    : 'text-slate-400 hover:bg-slate-800/30 hover:text-slate-200'
+                                                                }
+                                                            `}
+                                                        >
+                                                            <div className="flex items-center space-x-2">
+                                                                <span className="text-base">{subItem.icon}</span>
+                                                                <span>{subItem.name}</span>
+                                                            </div>
+                                                            {subItem.count && (
+                                                                <span className="text-xs bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
+                                                                    {subItem.count}
+                                                                </span>
+                                                            )}
+                                                        </button>
+                                                    )}
                                                 </li>
                                             ))}
                                         </ul>

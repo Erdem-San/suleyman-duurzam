@@ -3,230 +3,23 @@
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-// Tüm leverancier verileri
-const getAllLeveranciersData = () => {
-  const baseData: { [key: string]: any } = {
-    essent: {
-      name: 'Essent',
-      logo: '',
-      customers: '3,3 miljoen',
-      description: 'Essent is Nederland\'s grootste energieleverancier met meer dan 3,3 miljoen klanten. Met een breed aanbod aan energiecontracten, van vaste tot variabele tarieven, biedt Essent oplossingen voor elk huishouden.',
-      rating: 4.5,
-      features: ['Vaste tarieven beschikbaar', '100% groene energie opties', 'Online energiebeheer', 'Goede klantenservice', 'Flexibele contracten'],
-      color: 'from-blue-600 to-blue-700',
-      tarieven: { stroom: '€0,25 per kWh', gas: '€1,35 per m³', vastrecht: '€12,50 per maand' },
-      voordelen: ['Grootste energieleverancier van Nederland', 'Betrouwbare service en goede reputatie', 'Breed scala aan energiecontracten', 'Online tools voor energiebeheer', 'Goede klantenservice'],
-      nadelen: ['Niet altijd de scherpste tarieven', 'Sommige contracten hebben opzegkosten']
-    },
-    eneco: {
-      name: 'Eneco',
-      logo: '',
-      customers: '2,5 miljoen',
-      description: 'Eneco is een van de bekendste energieleveranciers van Nederland met een sterke focus op duurzame energie. Met 2,5 miljoen klanten biedt Eneco innovatieve energieoplossingen en zonnepanelen.',
-      rating: 4.6,
-      features: ['100% groene stroom', 'Dynamische tarieven', 'Zonnepanelen aanbod', 'Eneco App', 'Lokale energieproductie'],
-      color: 'from-green-600 to-green-700',
-      tarieven: { stroom: '€0,27 per kWh', gas: '€1,40 per m³', vastrecht: '€13,00 per maand' },
-      voordelen: ['Sterke focus op duurzaamheid', 'Innovatieve energieoplossingen', 'Goede klantenservice', 'Zonnepanelen mogelijkheden', 'Dynamische tarieven voor flexibiliteit'],
-      nadelen: ['Iets duurder dan budget leveranciers', 'Dynamische tarieven kunnen variëren']
-    },
-    vattenfall: {
-      name: 'Vattenfall',
-      logo: '',
-      customers: '2 miljoen',
-      description: 'Vattenfall is een Scandinavische energiereus met een sterke focus op duurzaamheid en windenergie. Met 2 miljoen Nederlandse klanten biedt Vattenfall betrouwbare energie tegen vaste tarieven.',
-      rating: 4.4,
-      features: ['Windenergie', 'Vaste prijzen', 'Goede service', 'Groene energie', 'Transparante tarieven'],
-      color: 'from-cyan-600 to-cyan-700',
-      tarieven: { stroom: '€0,26 per kWh', gas: '€1,38 per m³', vastrecht: '€12,75 per maand' },
-      voordelen: ['Sterke focus op windenergie', 'Vaste tarieven voor zekerheid', 'Goede klantenservice', 'Transparante prijzen', 'Betrouwbare leverancier'],
-      nadelen: ['Niet altijd de goedkoopste', 'Beperkte flexibiliteit in contracten']
-    },
-    'budget-energie': {
-      name: 'Budget Energie',
-      logo: '',
-      customers: '1 miljoen',
-      description: 'Budget Energie is onderdeel van de Nuts Groep en biedt voordelige energie tegen scherpe tarieven. Met 1 miljoen klanten is Budget Energie een populaire keuze voor huishoudens die willen besparen.',
-      rating: 4.3,
-      features: ['Lage tarieven', 'Geen opzegkosten', 'Flexibele contracten', 'Online beheer', 'Goede prijs-kwaliteit'],
-      color: 'from-orange-600 to-orange-700',
-      tarieven: { stroom: '€0,23 per kWh', gas: '€1,30 per m³', vastrecht: '€11,50 per maand' },
-      voordelen: ['Zeer scherpe tarieven', 'Geen opzegkosten', 'Flexibele contracten', 'Goede prijs-kwaliteit verhouding', 'Eenvoudig online beheer'],
-      nadelen: ['Minder focus op duurzaamheid', 'Basis klantenservice']
-    },
-    greenchoice: {
-      name: 'Greenchoice',
-      logo: '',
-      customers: '600.000',
-      description: 'Greenchoice is een 100% groene energieleverancier met focus op duurzaamheid en lokale energieproductie. Met 600.000 klanten is Greenchoice een populaire keuze voor milieubewuste consumenten.',
-      rating: 4.7,
-      features: ['100% groen', 'Lokale energie', 'CO2-neutraal', 'Zonnepanelen', 'Duurzame focus'],
-      color: 'from-emerald-600 to-emerald-700',
-      tarieven: { stroom: '€0,28 per kWh', gas: '€1,45 per m³', vastrecht: '€13,50 per maand' },
-      voordelen: ['100% groene energie', 'Sterke focus op duurzaamheid', 'Lokale energieproductie', 'Uitstekende klantenservice', 'CO2-neutraal gas'],
-      nadelen: ['Iets duurder dan gemiddeld', 'Minder flexibele contracten']
-    },
-    engie: {
-      name: 'Engie',
-      logo: '',
-      customers: '800.000',
-      description: 'Engie is een Franse energiereus met innovatieve energieoplossingen en goede service. Met 800.000 Nederlandse klanten biedt Engie betrouwbare energie en slimme energieoplossingen.',
-      rating: 4.2,
-      features: ['Innovatieve oplossingen', 'Goede klantenservice', 'Flexibele tarieven', 'Slimme meters', 'Online platform'],
-      color: 'from-purple-600 to-purple-700',
-      tarieven: { stroom: '€0,24 per kWh', gas: '€1,32 per m³', vastrecht: '€12,00 per maand' },
-      voordelen: ['Innovatieve energieoplossingen', 'Goede klantenservice', 'Flexibele tarieven', 'Slimme energieoplossingen', 'Betrouwbare leverancier'],
-      nadelen: ['Niet altijd de scherpste prijzen', 'Sommige diensten extra kosten']
-    },
-    oxxio: {
-      name: 'Oxxio',
-      logo: '',
-      customers: '500.000',
-      description: 'Oxxio is een Nederlandse energieleverancier met scherpe tarieven en transparante prijzen. Met 500.000 klanten biedt Oxxio eenvoudige energiecontracten zonder verborgen kosten.',
-      rating: 4.1,
-      features: ['Scherpe tarieven', 'Transparant', 'Nederlandse service', 'Geen verborgen kosten', 'Eenvoudig'],
-      color: 'from-red-600 to-red-700',
-      tarieven: { stroom: '€0,22 per kWh', gas: '€1,28 per m³', vastrecht: '€11,00 per maand' },
-      voordelen: ['Zeer scherpe tarieven', 'Transparante prijzen', 'Nederlandse klantenservice', 'Geen verborgen kosten', 'Eenvoudige contracten'],
-      nadelen: ['Basis service niveau', 'Beperkte duurzame opties']
-    },
-    'pure-energie': {
-      name: 'Pure Energie',
-      logo: '',
-      customers: '400.000',
-      description: 'Pure Energie is een 100% Nederlandse groene energieleverancier met lokale productie. Met 400.000 klanten biedt Pure Energie duurzame energie van Nederlandse bodem.',
-      rating: 4.5,
-      features: ['100% Nederlands', 'Lokale productie', 'Groene energie', 'Zonnepanelen', 'Duurzaam'],
-      color: 'from-yellow-600 to-yellow-700',
-      tarieven: { stroom: '€0,27 per kWh', gas: '€1,42 per m³', vastrecht: '€13,25 per maand' },
-      voordelen: ['100% Nederlandse energie', 'Lokale productie', 'Sterke duurzame focus', 'Goede klantenservice', 'Transparante herkomst'],
-      nadelen: ['Iets duurder dan gemiddeld', 'Beperkte contractopties']
-    },
-    vandebron: {
-      name: 'Vandebron',
-      logo: '',
-      customers: '300.000',
-      description: 'Vandebron verbindt consumenten direct met lokale energieproducenten. Met 300.000 klanten biedt Vandebron transparante, lokale energie zonder tussenpersonen.',
-      rating: 4.6,
-      features: ['Direct van producent', 'Lokaal', 'Transparant', 'Groene energie', 'Unieke aanpak'],
-      color: 'from-teal-600 to-teal-700',
-      tarieven: { stroom: '€0,26 per kWh', gas: '€1,38 per m³', vastrecht: '€12,50 per maand' },
-      voordelen: ['Directe verbinding met producenten', 'Lokale energieproductie', 'Zeer transparant', 'Unieke aanpak', 'Goede klantenservice'],
-      nadelen: ['Kleinere leverancier', 'Beperkte beschikbaarheid']
-    },
-    energiedirect: {
-      name: 'Energiedirect',
-      logo: '',
-      customers: '350.000',
-      description: 'Energiedirect is een online energieleverancier met scherpe tarieven en eenvoudig beheer. Met 350.000 klanten biedt Energiedirect betaalbare energie zonder gedoe.',
-      rating: 4.0,
-      features: ['Online beheer', 'Scherpe tarieven', 'Eenvoudig', 'Geen opzegkosten', 'Flexibel'],
-      color: 'from-indigo-600 to-indigo-700',
-      tarieven: { stroom: '€0,23 per kWh', gas: '€1,30 per m³', vastrecht: '€11,75 per maand' },
-      voordelen: ['Scherpe tarieven', 'Eenvoudig online beheer', 'Geen opzegkosten', 'Flexibele contracten', 'Goede prijs-kwaliteit'],
-      nadelen: ['Basis klantenservice', 'Minder persoonlijk contact']
-    },
-    'frank-energie': {
-      name: 'Frank Energie',
-      logo: '',
-      customers: '200.000',
-      description: 'Frank Energie is een moderne energieleverancier met dynamische tarieven en app-beheer. Met 200.000 klanten biedt Frank Energie transparante, real-time energieprijzen.',
-      rating: 4.4,
-      features: ['Dynamische tarieven', 'App', 'Transparant', 'Real-time prijzen', 'Modern'],
-      color: 'from-pink-600 to-pink-700',
-      tarieven: { stroom: '€0,25 per kWh (variabel)', gas: '€1,35 per m³ (variabel)', vastrecht: '€12,00 per maand' },
-      voordelen: ['Dynamische tarieven', 'Moderne app', 'Transparante real-time prijzen', 'Flexibele aanpak', 'Goede gebruikerservaring'],
-      nadelen: ['Dynamische tarieven kunnen variëren', 'Kleinere leverancier']
-    },
-    mega: {
-      name: 'Mega',
-      logo: '',
-      customers: '250.000',
-      description: 'Mega is een energieleverancier met focus op betaalbare energie en goede service. Met 250.000 klanten biedt Mega eenvoudige energiecontracten tegen scherpe tarieven.',
-      rating: 4.2,
-      features: ['Betaalbaar', 'Goede service', 'Flexibel', 'Eenvoudig', 'Betrouwbaar'],
-      color: 'from-amber-600 to-amber-700',
-      tarieven: { stroom: '€0,24 per kWh', gas: '€1,33 per m³', vastrecht: '€12,25 per maand' },
-      voordelen: ['Betaalbare tarieven', 'Goede klantenservice', 'Flexibele contracten', 'Eenvoudig beheer', 'Betrouwbare leverancier'],
-      nadelen: ['Minder focus op duurzaamheid', 'Basis service niveau']
-    }
-  };
-
-  // Particuliere leveranciers
-  const particuliere = [
-    '365-energie', 'anwb-energie', 'clean-energy', 'delta-energie', 'easyenergy',
-    'energie-vanons', 'energiedirect-nl', 'energyzero', 'groenestroomlokaal',
-    'groenpand', 'gulf-gas-plus-power', 'hallostroom', 'huismerk-energie',
-    'nextenergy', 'om-nieuwe-energie', 'powerpeers', 'tibber', 'unitedconsumers',
-    'woonenergie', 'zonneplan'
-  ];
-
-  // Zakelijke leveranciers
-  const zakelijke = [
-    'budget-energie-zakelijk', 'delta-energie-zakelijk', 'eneco-zakelijk',
-    'engie-zakelijk', 'essent-zakelijk', 'greenchoice-zakelijk',
-    'pure-energie-zakelijk', 'totalenergies-zakelijk', 'vandebron-zakelijk',
-    'vattenfall-zakelijk'
-  ];
-
-  // Grootzakelijke leveranciers
-  const grootzakelijke = [
-    'eneco-large-business', 'engie-large-business', 'essent-grootzakelijk',
-    'greenchoice-grootzakelijk', 'scholt-energy', 'shell-energy-eu',
-    'totalenergies-large-business', 'vattenfall-grootzakelijk'
-  ];
-
-  // Default data generator
-  const getDefaultData = (name: string, type: 'particulier' | 'zakelijk' | 'grootzakelijk' = 'particulier') => {
-    const baseName = name.replace(/-zakelijk$/, '').replace(/-grootzakelijk$/, '').replace(/-large-business$/, '');
-    const displayName = name
-      .replace(/-/g, ' ')
-      .replace(/\b\w/g, (l) => l.toUpperCase())
-      .replace(/Zakelijk/g, 'Zakelijk')
-      .replace(/Grootzakelijk/g, 'Grootzakelijk')
-      .replace(/Large Business/g, 'Large Business');
-
-    return {
-      name: displayName,
-      logo: '',
-      customers: type === 'grootzakelijk' ? 'Grootverbruik' : type === 'zakelijk' ? 'Zakelijk' : 'Particulier',
-      description: `${displayName} is een energieleverancier die ${type === 'grootzakelijk' ? 'gespecialiseerd is in grootzakelijke energieoplossingen' : type === 'zakelijk' ? 'energiecontracten aanbiedt voor MKB en ZZP' : 'energiecontracten aanbiedt voor particulieren'}.`,
-      rating: 4.0,
-      features: ['Betrouwbare levering', 'Goede service', 'Flexibele contracten', 'Online beheer', 'Competitieve tarieven'],
-      color: 'from-green-600 to-green-700',
-      tarieven: { stroom: '€0,25 per kWh', gas: '€1,35 per m³', vastrecht: '€12,50 per maand' },
-      voordelen: ['Betrouwbare leverancier', 'Goede service', 'Flexibele contracten'],
-      nadelen: ['Contacteer voor actuele tarieven', 'Beschikbaarheid kan variëren']
-    };
-  };
-
-  // Add all particuliere
-  particuliere.forEach(slug => {
-    if (!baseData[slug]) {
-      baseData[slug] = getDefaultData(slug, 'particulier');
-    }
-  });
-
-  // Add all zakelijke
-  zakelijke.forEach(slug => {
-    if (!baseData[slug]) {
-      baseData[slug] = getDefaultData(slug, 'zakelijk');
-    }
-  });
-
-  // Add all grootzakelijke
-  grootzakelijke.forEach(slug => {
-    if (!baseData[slug]) {
-      baseData[slug] = getDefaultData(slug, 'grootzakelijk');
-    }
-  });
-
-  return baseData;
-};
-
-const leveranciersData = getAllLeveranciersData();
+interface Leverancier {
+  id: string;
+  name: string;
+  slug: string;
+  customers: string;
+  description: string;
+  rating: number;
+  color: string;
+  stroom: string;
+  gas: string;
+  vastrecht: string;
+  features: string[];
+  voordelen: string[];
+  nadelen: string[];
+}
 
 // Default yorumlar
 const getDefaultReviews = (slug: string) => {
@@ -247,11 +40,66 @@ const getDefaultReviews = (slug: string) => {
 };
 
 export default function LeverancierDetailPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
-  const slug = typeof params === 'object' && 'then' in params ? '' : params.slug;
-  const leverancier = leveranciersData[slug];
-  const [reviews, setReviews] = useState(getDefaultReviews(slug));
+  const [slug, setSlug] = useState<string>('');
+  const [leverancier, setLeverancier] = useState<Leverancier | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState<any[]>([]);
   const [newReview, setNewReview] = useState({ name: '', rating: 5, comment: '' });
   const [showReviewForm, setShowReviewForm] = useState(false);
+
+  useEffect(() => {
+    const resolveParams = async () => {
+      const resolvedParams = typeof params === 'object' && 'then' in params ? await params : params;
+      setSlug(resolvedParams.slug);
+    };
+    resolveParams();
+  }, [params]);
+
+  useEffect(() => {
+    if (slug) {
+      fetchLeverancier();
+      setReviews(getDefaultReviews(slug));
+    }
+  }, [slug]);
+
+  const fetchLeverancier = async () => {
+    try {
+      const response = await fetch(`/api/leveranciers/slug/${slug}`);
+      if (response.ok) {
+        const data = await response.json();
+        setLeverancier(data);
+      }
+    } catch (error) {
+      console.error('Error fetching leverancier:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmitReview = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newReview.name && newReview.comment) {
+      setReviews([{
+        ...newReview,
+        date: 'Vandaag'
+      }, ...reviews]);
+      setNewReview({ name: '', rating: 5, comment: '' });
+      setShowReviewForm(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+          <p className="mt-4 text-gray-600">Laden...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!leverancier) {
     return (
@@ -268,18 +116,6 @@ export default function LeverancierDetailPage({ params }: { params: Promise<{ sl
     );
   }
 
-  const handleSubmitReview = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newReview.name && newReview.comment) {
-      setReviews([{
-        ...newReview,
-        date: 'Vandaag'
-      }, ...reviews]);
-      setNewReview({ name: '', rating: 5, comment: '' });
-      setShowReviewForm(false);
-    }
-  };
-
   const averageRating = reviews.length > 0
     ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
     : leverancier.rating.toFixed(1);
@@ -287,7 +123,7 @@ export default function LeverancierDetailPage({ params }: { params: Promise<{ sl
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       {/* Hero Section */}
       <section className={`bg-gradient-to-r ${leverancier.color} text-white py-16`}>
         <div className="container mx-auto px-4">
@@ -333,15 +169,15 @@ export default function LeverancierDetailPage({ params }: { params: Promise<{ sl
             <div className="grid md:grid-cols-3 gap-6">
               <div className="border border-gray-200 rounded-lg p-4">
                 <div className="text-sm text-gray-600 mb-2">Stroom</div>
-                <div className="text-2xl font-bold text-gray-900">{leverancier.tarieven.stroom}</div>
+                <div className="text-2xl font-bold text-gray-900">{leverancier.stroom}</div>
               </div>
               <div className="border border-gray-200 rounded-lg p-4">
                 <div className="text-sm text-gray-600 mb-2">Gas</div>
-                <div className="text-2xl font-bold text-gray-900">{leverancier.tarieven.gas}</div>
+                <div className="text-2xl font-bold text-gray-900">{leverancier.gas}</div>
               </div>
               <div className="border border-gray-200 rounded-lg p-4">
                 <div className="text-sm text-gray-600 mb-2">Vastrecht</div>
-                <div className="text-2xl font-bold text-gray-900">{leverancier.tarieven.vastrecht}</div>
+                <div className="text-2xl font-bold text-gray-900">{leverancier.vastrecht}</div>
               </div>
             </div>
             <p className="text-sm text-gray-500 mt-4">* Tarieven kunnen variëren per contracttype en regio</p>
@@ -377,7 +213,7 @@ export default function LeverancierDetailPage({ params }: { params: Promise<{ sl
                 ))}
               </ul>
             </div>
-            
+
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6 font-montserrat">Nadelen</h2>
               <ul className="space-y-3">
@@ -487,6 +323,7 @@ export default function LeverancierDetailPage({ params }: { params: Promise<{ sl
               ))}
             </div>
           </div>
+
 
           {/* CTA */}
           <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-xl shadow-lg p-8 text-white text-center">
